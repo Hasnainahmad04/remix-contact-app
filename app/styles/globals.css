@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.edit_btn {
+    @apply px-4 py-2 rounded-md text-gray-500 bg-white shadow border hover:border-gray-300 transition duration-200 ease-in
+}
+
+.delete_btn {
+    @apply px-4 py-2 rounded-md text-red-500 bg-white shadow border hover:border-red-500 transition duration-200 ease-in
+}
