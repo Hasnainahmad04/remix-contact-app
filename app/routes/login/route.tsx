@@ -11,11 +11,15 @@ import { validateLoginRequest } from "~/schema/validations";
 import { LoginForm } from "~/types";
 import { login } from "~/utils/auth";
 import { getUser } from "~/utils/session";
+import { useEffect } from "react";
 
 const Login = () => {
   const fetcher = useFetcher();
   const { errors, message } = fetcher.data || {};
-  if (message) toast.error(message);
+
+  useEffect(() => {
+    if (message) toast.error(message);
+  }, [fetcher.data]);
 
   return (
     <section className="h-screen w-full justify-center items-center flex ">

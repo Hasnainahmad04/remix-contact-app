@@ -1,26 +1,20 @@
 import { ActionFunctionArgs, json } from "@remix-run/node";
-import {
-  Form,
-  Link,
-  useActionData,
-  useFetcher,
-  useNavigate,
-  useNavigation,
-} from "@remix-run/react";
+import { Link, useFetcher, useNavigation } from "@remix-run/react";
 import toast from "react-hot-toast";
 import InputField from "~/components/InputField";
 import { validateSignupRequest } from "~/schema/validations";
 import { RegisterForm } from "~/types";
 import { registerUser } from "~/utils/auth";
+import { useEffect } from "react";
 
 const SignUp = () => {
   const fetcher = useFetcher();
   const response = fetcher.data;
-  if (!response?.success && response?.message) {
-    toast.error(response?.message);
-  }
-
-  const navigator = useNavigation();
+  useEffect(() => {
+    if (!response?.success && response?.message) {
+      toast.error(response?.message);
+    }
+  }, [response]);
 
   return (
     <section className="h-screen w-full justify-center items-center flex ">
