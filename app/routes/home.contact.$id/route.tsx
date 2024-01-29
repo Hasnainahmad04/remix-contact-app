@@ -3,10 +3,11 @@ import { getContactDetail } from "~/utils/contacts";
 import { useLoaderData } from "react-router";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
-import { Form } from "@remix-run/react";
+import { Form, useNavigate } from "@remix-run/react";
 
 const ContactDetail = () => {
   const res = useLoaderData<typeof loader>();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!res.success) {
@@ -33,7 +34,12 @@ const ContactDetail = () => {
           )}
         </div>
         <div className={"flex flex-row"}>
-          <button className={"edit_btn"}>Edit</button>
+          <button
+            className={"edit_btn"}
+            onClick={() => navigate(`/home/contact/${res.contact.id}/edit`)}
+          >
+            Edit
+          </button>
           <Form
             action={`/home/contact/${res.contact.id}/delete`}
             method={"POST"}

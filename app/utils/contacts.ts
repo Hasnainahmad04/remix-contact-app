@@ -64,6 +64,27 @@ const addContact = async (request: Request, data: Contact) => {
   }
 };
 
+const updateContact = async (contact: Contact) => {
+  if (!contact.id)
+    return json({ message: "Bad request", success: false }, { status: 400 });
+  try {
+    const updated = await prisma.contact.update({
+      where: { id: contact.id },
+      data: {
+        first: contact.first,
+        last: contact.last,
+        avatar: contact.avatar,
+        twitter: contact.twitter,
+      },
+    });
+
+    return json({ success: true, contact: updated }, { status: 200 });
+  } catch (e) {
+    console.log("error........", e);
+    return handleUnExpectedError();
+  }
+};
+
 const deleteContact = async (id: string) => {
   try {
     await prisma.contact.delete({ where: { id } });
@@ -74,4 +95,28 @@ const deleteContact = async (id: string) => {
   }
 };
 
-export { getUserContacts, getContactDetail, addContact, deleteContact };
+const searchContact = (query: string) => {
+  try {
+    const filteredContact = prisma.contact.findMany({
+      where: {
+        OR: [
+          { first: { contain: query, mode: "insensitive" } },
+          { last: { contain: query, mode: "insensitive" } },
+        ],
+      },
+    });
+
+    return json({ contacts: filteredContact, success: true });
+  } catch (e) {
+    return handleUnExpectedError();
+  }
+};
+
+export {
+  getUserContacts,
+  getContactDetail,
+  addContact,
+  deleteContact,
+  updateContact,
+  searchContact,
+};

@@ -22,13 +22,13 @@ export const validateLoginRequest = (data: LoginForm) => {
   return result.success ? {} : { errors: formatErrors(result.error) };
 };
 
-export const validateNewContactRequest = (data: Contact) => {
+export const validateContactRequest = (data: Contact) => {
   const result = NewContactSchema.safeParse(data);
   return result.success
     ? {}
     : {
         errors: formatErrors(result.error),
         success: false,
-        message: "Invalid Data",
+        message: "Please Enter Valid Data",
       };
 };
