@@ -1,15 +1,9 @@
-import InputField from "~/components/InputField";
-import {
-  Form,
-  FormProps,
-  useActionData,
-  useNavigation,
-} from "@remix-run/react";
-import { json, ActionFunction } from "@remix-run/node";
+import { useActionData } from "@remix-run/react";
+import { ActionFunction, json } from "@remix-run/node";
 import { validateContactRequest } from "~/schema/validations";
 import { Contact } from "~/types";
 import { addContact } from "~/utils/contacts";
-import { MutableRefObject, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import ContactForm from "~/components/ContactForm";
 

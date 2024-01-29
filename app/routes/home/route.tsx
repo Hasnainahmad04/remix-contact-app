@@ -1,7 +1,7 @@
 import { Form, Outlet, useNavigate, useNavigation } from "@remix-run/react";
-import { LoaderFunction, redirect } from "@remix-run/node";
+import { LoaderFunction } from "@remix-run/node";
 import { getUserContacts } from "~/utils/contacts";
-import { ActionFunction, useLoaderData } from "react-router";
+import { useLoaderData } from "react-router";
 import ContactList from "~/components/ContactList";
 
 const Main = () => {
